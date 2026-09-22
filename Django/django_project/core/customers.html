@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DjangoTraders - Customer Directory</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f4f4f4; }
+        h1 { color: #333; }
+        .back-link { margin-bottom: 20px; display: inline-block; color: #0066cc; text-decoration: none; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #0066cc; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'home' %}" class="back-link">← Back to Product Catalog</a>
+    <h1>Live Customer Directory</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>DjangoTraders</th>
+                <th>Info</th>
+                <th>help@djangoTraders.com</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td><strong>{{ customer.companyname }}</strong></td>
+                    <td>{{ customer.contactname }}</td>
+                    <td><code>{{ customer.customerid }}</code></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No customer records found in the database.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+

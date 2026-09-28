@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: my-django-db-app
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn django_project.wsgi:application --chdir Django/django_project"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.5
+      - key: DJANGO_SETTINGS_MODULE
+        value: "django_project.settings"

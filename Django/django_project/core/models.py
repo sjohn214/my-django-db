@@ -43,7 +43,8 @@ class customers(models.Model):
 
 
 class employee_territories(models.Model):
-    id = models.AutoField(primary_key=True)  # Surrogate primary key for Django compatibility
+    # Declare a standard auto field named anything BUT 'pk' to satisfy the layout engine
+    id = models.AutoField(primary_key=True)  
     employee = models.ForeignKey('employees', models.DO_NOTHING)
     territory = models.ForeignKey('territories', models.DO_NOTHING)
 
@@ -51,7 +52,7 @@ class employee_territories(models.Model):
         managed = False
         db_table = 'employee_territories'
         verbose_name_plural = "Employee Territories"
-        unique_together = (('employee', 'territory'),)  # Preserves multi-column layout rule
+        unique_together = (('employee', 'territory'),)
 
 
 
@@ -86,7 +87,7 @@ class employees(models.Model):
 
 
 class order_details(models.Model):
-    id = models.AutoField(primary_key=True)  # Surrogate primary key for Django compatibility
+    id = models.AutoField(primary_key=True)  
     order = models.ForeignKey('orders', models.DO_NOTHING)
     product = models.ForeignKey('products', models.DO_NOTHING)
     unit_price = models.FloatField()
@@ -97,7 +98,7 @@ class order_details(models.Model):
         managed = False
         db_table = 'order_details'
         verbose_name_plural = "Order Details"
-        unique_together = (('order', 'product'),)  # Preserves multi-column layout rule
+        unique_together = (('order', 'product'),)
 
 
 

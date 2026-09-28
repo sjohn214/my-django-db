@@ -43,15 +43,15 @@ class customers(models.Model):
 
 
 class employee_territories(models.Model):
-    pk = models.CompositePrimaryKey('employee_id', 'territory_id')
+    id = models.AutoField(primary_key=True)  # Surrogate primary key for Django compatibility
     employee = models.ForeignKey('employees', models.DO_NOTHING)
     territory = models.ForeignKey('territories', models.DO_NOTHING)
-
 
     class Meta:
         managed = False
         db_table = 'employee_territories'
         verbose_name_plural = "Employee Territories"
+        unique_together = (('employee', 'territory'),)  # Preserves multi-column layout rule
 
 
 
@@ -86,18 +86,18 @@ class employees(models.Model):
 
 
 class order_details(models.Model):
-    pk = models.CompositePrimaryKey('order_id', 'product_id')
+    id = models.AutoField(primary_key=True)  # Surrogate primary key for Django compatibility
     order = models.ForeignKey('orders', models.DO_NOTHING)
     product = models.ForeignKey('products', models.DO_NOTHING)
     unit_price = models.FloatField()
     quantity = models.SmallIntegerField()
     discount = models.FloatField()
 
-
     class Meta:
         managed = False
         db_table = 'order_details'
         verbose_name_plural = "Order Details"
+        unique_together = (('order', 'product'),)  # Preserves multi-column layout rule
 
 
 

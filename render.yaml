@@ -3,7 +3,7 @@ services:
     name: my-django-db-app
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn django_project.wsgi:application --chdir Django/django_project"
+    startCommand: "PYTHONPATH=. gunicorn django_project.wsgi:application --chdir Django/django_project"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.5

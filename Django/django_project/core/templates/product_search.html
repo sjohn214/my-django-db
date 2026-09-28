@@ -1,0 +1,85 @@
+<!-- Handles inventory display and link integration routing to specific detail page -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <!-- Search Controls Card -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body p-4">
+                <h2 class="card-title fw-bold text-dark mb-3">Product Inventory Search</h2>
+                <form method="GET" action="{% url 'product_search' %}" class="row g-2">
+    <div class="col-md-6">
+        <input type="text" name="q" value="{{ query }}" class="form-control form-control-lg border-secondary-subtle" placeholder="Search by Product Name...">
+    </div>
+    <div class="col-md-3">
+        <select name="category" class="form-select form-select-lg border-secondary-subtle">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+                <option value="{{ cat.category_id }}" {% if selected_category == cat.category_id|stringformat:"s" %}selected{% endif %}>
+                    {{ cat.category_name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-3">
+        <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm fw-semibold">Apply Filters</button>
+    </div>
+</form>
+
+            </div>
+        </div>
+
+        <!-- Inventory List Card -->
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped align-middle mb-0">
+                        <thead class="table-success text-uppercase">
+                            <tr>
+                                <th class="ps-4">ID</th>
+                                <th>Product Item Name</th>
+                                <th>Unit Price</th>
+                                <th>Stock Status</th>
+                                <th class="text-end pe-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in results %}
+                            <tr>
+                                <td class="ps-4 text-muted">{{ product.product_id }}</td>
+                                <td class="fw-bold">{{ product.product_name }}</td>
+                                <td class="text-success fw-semibold">${{ product.unit_price|floatformat:2 }}</td>
+                                <td>
+                                    {% if product.discontinued == 1 %}
+                                        <span class="badge bg-danger text-uppercase">Discontinued</span>
+                                    {% elif product.units_in_stock > 0 %}
+                                        <span class="badge bg-success">{{ product.units_in_stock }} Units Avail.</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">Out of Stock</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end pe-4">
+                                    <a href="{% url 'product_detail' product.product_id %}" class="btn btn-sm btn-outline-dark fw-medium px-3">View Details</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center py-5 text-muted">
+                                    <p class="mb-0 fs-5">No products found matching "{{ query }}".</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div> <!-- /.table-responsive -->
+                
+                <!-- INCLUDE PAGINATION COMPONENT DIRECTLY UNDER THE TABLE -->
+                {% include '_pagination.html' with page_obj=results %}
+                
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.col-md-12 -->
+</div> <!-- /.row -->
+{% endblock %}

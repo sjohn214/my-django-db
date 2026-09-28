@@ -22,3 +22,21 @@ from core.views import home_view, customer_list_view  # <-- Update this import l
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+# Build product detail feature
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+]
+
+# Class-based views
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('customers/', views.customer_search, name='customer_search'),
+    path('products/', views.product_search, name='product_search'),
+    path('products/<int:product_id>/', views.product_detail, name='product_detail'),
+]

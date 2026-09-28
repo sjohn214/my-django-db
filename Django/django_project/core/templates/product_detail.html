@@ -1,0 +1,74 @@
+<!--Dashboard display for information via relationship-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <!-- Back Navigation Link -->
+        <a href="{% url 'product_search' %}" class="btn btn-sm btn-link text-decoration-none text-muted mb-3 p-0">&larr; Back to Catalog Inventory</a>
+
+        <div class="card shadow border-0 overflow-hidden">
+            <!-- Header Accent Banner (Matches green product styling theme) -->
+            <div class="bg-success text-white p-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="text-uppercase tracking-wider text-light opacity-75 small fw-bold">Inventory Record Summary</span>
+                    <h1 class="h2 mb-0 fw-bold mt-1">{{ product.product_name }}</h1>
+                </div>
+                <span class="fs-3 fw-bold bg-white text-success px-3 py-1 rounded shadow-sm">${{ product.unit_price|floatformat:2 }}</span>
+            </div>
+            
+            <div class="card-body p-4 bg-white">
+                <div class="row g-4">
+                    <!-- Metrics Matrix Row -->
+                    <div class="col-6 col-md-3 text-center border-end">
+                        <small class="text-muted text-uppercase d-block mb-1 small">Item ID</small>
+                        <span class="fs-5 fw-bold text-dark">#{{ product.product_id }}</span>
+                    </div>
+                    <div class="col-6 col-md-3 text-center border-end">
+                        <small class="text-muted text-uppercase d-block mb-1 small">In Stock</small>
+                        <span class="fs-5 fw-bold {% if product.units_in_stock > 0 %}text-success{% else %}text-danger{% endif %}">{{ product.units_in_stock }}</span>
+                    </div>
+                    <div class="col-6 col-md-3 text-center border-end">
+                        <small class="text-muted text-uppercase d-block mb-1 small">On Order</small>
+                        <span class="fs-5 fw-bold text-info">{{ product.units_on_order }}</span>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <small class="text-muted text-uppercase d-block mb-1 small">Reorder Point</small>
+                        <span class="fs-5 fw-bold text-warning">{{ product.reorder_level }}</span>
+                    </div>
+
+                    <hr class="my-4 text-muted opacity-25">
+
+                    <!-- Relationship and Supplier Context Metadata -->
+                    <div class="col-12">
+                        <h5 class="fw-bold text-secondary mb-3">Supply Specifications</h5>
+                        <div class="list-group list-group-flush border rounded">
+                            <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                <span class="text-muted">Assigned Category Classification</span>
+                                <span class="fw-semibold text-dark">{{ product.category.category_name|default:"Unclassified" }}</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                <span class="text-muted">Supplier Manufacturer Group</span>
+                                <span class="fw-semibold text-dark">{{ product.supplier.company_name|default:"Unknown Supplier" }}</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                <span class="text-muted">Quantity Allocation Unit</span>
+                                <span class="fw-semibold text-dark">{{ product.quantity_per_unit|default:"N/A" }}</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                <span class="text-muted">Status Catalog Flag</span>
+                                {% if product.discontinued == 1 %}
+                                    <span class="badge bg-danger p-2 text-uppercase">Discontinued {% if product.date_discontinued %}({{ product.date_discontinued }}){% endif %}</span>
+                                {% else %}
+                                    <span class="badge bg-success p-2 text-uppercase">Active Stock</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- /.row -->
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.col-md-8 -->
+</div> <!-- /.row -->
+{% endblock %}

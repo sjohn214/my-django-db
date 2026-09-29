@@ -16,27 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import home_view, customer_list_view  # <-- Update this import line
-
+from core import views  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
-
-# Build product detail feature
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('product/<int:pk>/', views.product_detail, name='product_detail'),
-]
-
-# Class-based views
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('customers/', views.customer_search, name='customer_search'),
-    path('products/', views.product_search, name='product_search'),
+    
+    # 1. Home / Product Catalog
+    path('', views.home_view, name='home'),
+    
+    # 2. Customer List & Search
+    path('customers/', views.customer_list_view, name='customer_list'),
+    path('customers/search/', views.customer_search, name='customer_search'),
+    
+    # 3. Product Search & Detail
+    path('products/search/', views.product_search, name='product_search'),
     path('products/<int:product_id>/', views.product_detail, name='product_detail'),
 ]
+

@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+import os
+SECRET_KEY = os.environ.get('SECRET_KEY') or 'django-insecure-local-development-fallback-key-12345'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -60,13 +62,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'myproject.urls'
 
-TEMPLATES = [
+TEMPLATES = TEMPLATES = TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / 'templates'],  # Looks for a global "templates" folder at the project level
+        'APP_DIRS': True,                  # Looks for a "templates" folder inside individual app folders (like core)
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -75,7 +78,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'myproject.wsgi.application'
+       
+
+
+# WSGI_APPLICATION = 'myproject.wsgi.application'
 
 
 # Database

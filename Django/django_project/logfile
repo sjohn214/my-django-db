@@ -1,0 +1,22 @@
+2026-09-29 05:39:31.509 UTC [90299] LOG:  starting PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-29 05:39:31.509 UTC [90299] LOG:  listening on IPv6 address "::1", port 5432
+2026-09-29 05:39:31.509 UTC [90299] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-09-29 05:39:31.525 UTC [90299] LOG:  listening on Unix socket "/home/codespace/local_db/.s.PGSQL.5432"
+2026-09-29 05:39:31.544 UTC [90305] LOG:  database system was shut down at 2026-09-29 05:39:19 UTC
+2026-09-29 05:39:31.554 UTC [90299] LOG:  database system is ready to accept connections
+2026-09-29 05:39:54.368 UTC [90540] FATAL:  role "postgres" does not exist
+2026-09-29 05:39:54.375 UTC [90541] FATAL:  role "postgres" does not exist
+2026-09-29 05:44:31.641 UTC [90303] LOG:  checkpoint starting: time
+2026-09-29 05:46:14.168 UTC [90303] LOG:  checkpoint complete: wrote 1026 buffers (6.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=102.348 s, sync=0.146 s, total=102.527 s; sync files=374, longest=0.009 s, average=0.001 s; distance=4843 kB, estimate=4843 kB; lsn=0/19AA570, redo lsn=0/19AA538
+2026-09-29 05:48:43.287 UTC [95275] ERROR:  relation "products" does not exist at character 318
+2026-09-29 05:48:43.287 UTC [95275] STATEMENT:  SELECT "products"."product_id", "products"."product_name", "products"."supplier_id", "products"."category_id", "products"."quantity_per_unit", "products"."unit_price", "products"."units_in_stock", "products"."units_on_order", "products"."reorder_level", "products"."discontinued", "products"."date_discontinued" FROM "products" LIMIT 20
+2026-09-29 05:48:43.288 UTC [95275] ERROR:  relation "products" does not exist at character 318
+2026-09-29 05:48:43.288 UTC [95275] STATEMENT:  SELECT "products"."product_id", "products"."product_name", "products"."supplier_id", "products"."category_id", "products"."quantity_per_unit", "products"."unit_price", "products"."units_in_stock", "products"."units_on_order", "products"."reorder_level", "products"."discontinued", "products"."date_discontinued" FROM "products" LIMIT 20
+2026-09-29 05:48:43.288 UTC [95275] ERROR:  relation "products" does not exist at character 318
+2026-09-29 05:48:43.288 UTC [95275] STATEMENT:  SELECT "products"."product_id", "products"."product_name", "products"."supplier_id", "products"."category_id", "products"."quantity_per_unit", "products"."unit_price", "products"."units_in_stock", "products"."units_on_order", "products"."reorder_level", "products"."discontinued", "products"."date_discontinued" FROM "products" LIMIT 20
+2026-09-29 05:56:25.611 UTC [99133] ERROR:  relation "products" does not exist at character 318
+2026-09-29 05:56:25.611 UTC [99133] STATEMENT:  SELECT "products"."product_id", "products"."product_name", "products"."supplier_id", "products"."category_id", "products"."quantity_per_unit", "products"."unit_price", "products"."units_in_stock", "products"."units_on_order", "products"."reorder_level", "products"."discontinued", "products"."date_discontinued" FROM "products" LIMIT 20
+2026-09-29 05:56:25.612 UTC [99133] ERROR:  relation "products" does not exist at character 318
+2026-09-29 05:56:25.612 UTC [99133] STATEMENT:  SELECT "products"."product_id", "products"."product_name", "products"."supplier_id", "products"."category_id", "products"."quantity_per_unit", "products"."unit_price", "products"."units_in_stock", "products"."units_on_order", "products"."reorder_level", "products"."discontinued", "products"."date_discontinued" FROM "products" LIMIT 20
+2026-09-29 05:56:25.613 UTC [99133] ERROR:  relation "products" does not exist at character 318
+2026-09-29 05:56:25.613 UTC [99133] STATEMENT:  SELECT "products"."product_id", "products"."product_name", "products"."supplier_id", "products"."category_id", "products"."quantity_per_unit", "products"."unit_price", "products"."units_in_stock", "products"."units_on_order", "products"."reorder_level", "products"."discontinued", "products"."date_discontinued" FROM "products" LIMIT 20
